@@ -286,6 +286,43 @@ body { -webkit-text-size-adjust: 100%; }
 
   .badges-strip { flex-direction: column; padding: 1rem; gap: 1rem; }
 }
+
+.menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; color: var(--cream); cursor: pointer; }
+
+/* MOBILE MENU PANEL */
+.mobile-menu { position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; background: var(--warm-dark); z-index: 999; padding: 4rem 2rem; display: flex; flex-direction: column; gap: 2rem;
+  transition: right 0.4s ease;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu a { color: var(--cream); text-decoration: none; font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+.mobile-menu button {
+  margin-top: auto;
+  padding: 1rem;
+  background: var(--terracotta);
+  border: none;
+  color: white;
+  font-size: 1rem;
+}
+
+/* nur mobil sichtbar */
+@media (max-width: 768px) {
+  .nav-links,
+  .nav-cta {
+    display: none;
+  }
+
+  .menu-toggle { display: block; color: var(--warm-dark);
+  }
+
+  nav.scrolled .menu-toggle { color: var(--terracotta);
+  }
+}
 </style>
 </head>
 <body>
@@ -299,7 +336,17 @@ body { -webkit-text-size-adjust: 100%; }
     <li><a href="#contact">Kontakt</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('reservation').scrollIntoView({ behavior: 'smooth'})">Tisch reservieren</button>
+<button class="menu-toggle" onclick="toggleMenu()">☰</button>
 </nav>
+<div id="mobileMenu" class="mobile-menu">
+<a href="#about" onclick="toggleMenu()">Über Uns</a>
+<a href="./menu.html" onclick="toggleMenu()">Speisekarte</a>
+<a href="#reservation" onclick="toggleMenu()">Reservierung</a>
+<a href="#contact" onclick="toggleMenu()">Kontakt</a>
+
+<button onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth')}; toggleMenu();">
+ Tisch Reservieren </button>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -577,6 +624,11 @@ function openMenu() {
       behavior: "smooth"
     });
 }
+
+function toggleMenu() {
+document.getElementById("mobileMenu").classList.toggle("open");
+}
+
 </script>
 </body>
 </html>
