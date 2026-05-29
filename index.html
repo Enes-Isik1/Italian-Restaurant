@@ -10,7 +10,9 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; overflow-x: hidden; }
 img { max-width: 100%; height: auto; display: block; }
-* { box-sizing: border-box; }
+
+* { min-width: 0; box-sizing: border-box; }
+body { -webkit-text-size-adjust: 100%; }
 
   :root {
     --cream: #F5EFE0; --warm-dark: #1C1208; --terracotta: #C4622D;
@@ -173,6 +175,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .menu-item, .testi-card {
   min-width: 0;
+.menu-grid, .about, .reservation, .testi-grid { min-width: 0; }
 }
   /* ── PARALLAX QUOTE ── */
   .quote-section {
@@ -272,24 +275,16 @@ img { max-width: 100%; height: auto; display: block; }
   .menu-grid { grid-template-columns: 1fr; }
 
   .about {
-    grid-template-columns: 1fr;
-    gap: 2rem; }
+    grid-template-columns: 1fr; gap: 2rem; }
 
   .reservation {
-    grid-template-columns: 1fr;
-    gap: 2rem; }
+    grid-template-columns: 1fr; gap: 2rem; }
 
-  .form-row {
-    grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
 
-  .gallery-strip {
-    grid-template-columns: 1fr;
-    height: auto; }
+  .gallery-strip { grid-template-columns: 1fr; height: auto; }
 
-  .badges-strip {
-    flex-direction: column;
-    padding: 1rem;
-    gap: 1rem; }
+  .badges-strip { flex-direction: column; padding: 1rem; gap: 1rem; }
 }
 </style>
 </head>
