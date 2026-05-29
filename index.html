@@ -1,4 +1,4 @@
-
+ 
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -8,6 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+* { box-sizing: border-box; }
+
   :root {
     --cream: #F5EFE0; --warm-dark: #1C1208; --terracotta: #C4622D;
     --olive: #6B7A2A; --gold: #C9983A; --text-muted: #6B5B42;
@@ -73,7 +77,7 @@
 
   /* ── HERO ── */
   .hero {
-    min-height: 100vh; position:relative; overflow:hidden;
+    min-height: 100svh; position:relative; overflow:hidden;
     display:flex; align-items:center;
   }
   .hero-bg {
@@ -167,6 +171,9 @@
   .testi-text { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; line-height:1.7; color:var(--warm-dark); margin-bottom:1.2rem; }
   .testi-author { font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); }
 
+.menu-item, .testi-card {
+  min-width: 0;
+}
   /* ── PARALLAX QUOTE ── */
   .quote-section {
     position:relative; overflow:hidden; padding:9rem 4rem;
@@ -247,43 +254,42 @@
   padding-left:1rem;
   border-radius:10px;}
 
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
 
-  nav {
-    padding: 1rem 1.2rem; }
-
-  .nav-links {
-    display: none; /* optional: oder hamburger später */ }
+  nav { padding: 1rem 1rem; }
 
   .hero-content {
-    padding: 6rem 1.5rem; }
+    padding: 6rem 1.2rem;
+    max-width: 100%; }
 
-  .badges-strip {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem; }
+  .menu-section,
+  .testimonials,
+  .reservation,
+  footer {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem; }
+
+  .menu-grid { grid-template-columns: 1fr; }
 
   .about {
+    grid-template-columns: 1fr;
+    gap: 2rem; }
+
+  .reservation {
+    grid-template-columns: 1fr;
+    gap: 2rem; }
+
+  .form-row {
     grid-template-columns: 1fr; }
 
   .gallery-strip {
     grid-template-columns: 1fr;
     height: auto; }
 
-  .menu-grid {
-    grid-template-columns: 1fr; }
-
-  .reservation {
-    grid-template-columns: 1fr;
-    padding: 4rem 1.5rem; }
-
-  footer {
-    grid-template-columns: 1fr;
-    padding: 3rem 1.5rem; }
-
-  .form-row {
-    grid-template-columns: 1fr; }
-
+  .badges-strip {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem; }
 }
 </style>
 </head>
