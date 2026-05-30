@@ -288,6 +288,8 @@ footer {
   padding-right: 1.2rem;
 }
 @media (max-width: 768px) {
+.menu-toggle { display: block; }
+{
   .nav-logo {
     font-size: 1.1rem;
   }
@@ -306,7 +308,7 @@ footer {
   .hero-actions {
     flex-direction: column; align-items: flex-start; gap: 0.8rem; 
 }
- .btn-primary, btn-ghost {
+ .btn-primary, .btn-ghost {
     width: 100%; text-align: center;
 }
 
@@ -410,11 +412,71 @@ footer {
     display: none;
   }
 
-  .menu-toggle { display: block; color: var(--warm-dark);
+  .menu-toggle { display: none; 
   }
 
   nav.scrolled .menu-toggle { color: var(--terracotta);
   }
+}
+/* ===== MOBILE FOOTER ACCORDION ===== */
+.mobile-footer-accordion {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1rem;
+}
+
+.accordion-item {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.accordion-btn {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--cream);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 1rem 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* kleiner Pfeil */
+.accordion-btn::after {
+  content: "＋";
+  font-size: 1.2rem;
+  opacity: 0.7;
+  transition: transform 0.3s;
+}
+
+.accordion-item.open .accordion-btn::after {
+  content: "–";
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  transition: max-height 0.35s ease;
+  padding-left: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.accordion-content a {
+  font-size: 1rem;
+  color: rgba(245,239,224,0.8);
+  text-decoration: none;
+  padding: 0.3rem 0;
+}
+
+.accordion-content a:hover {
+  color: var(--gold);
 }
 </style>
 </head>
@@ -440,14 +502,49 @@ footer {
   <button onclick="toggleMenu()">✕</button>
 </div>
 
-<a href="#about" onclick="toggleMenu()">Über Uns</a>
-<a href="./menu.html" onclick="toggleMenu()">Speisekarte</a>
-<a href="#reservation" onclick="toggleMenu()">Reservierung</a>
-<a href="#contact" onclick="toggleMenu()">Kontakt</a>
+<!-- MOBILE FOOTER ACCORDION -->
+<div class="mobile-footer-accordion">
 
-<button onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'}); toggleMenu();">
-  Tisch Reservieren
-</button>
+  <!-- NAVIGATION -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      Navigation
+    </button>
+    <div class="accordion-content">
+      <a href="#about" onclick="toggleMenu()">Über Uns</a>
+      <a href="./menu.html" onclick="toggleMenu()">Speisekarte</a>
+      <a href="./gallery.html" onclick="toggleMenu()">Galerie</a>
+      <a href="#reservation" onclick="toggleMenu()">Reservierung</a>
+    </div>
+  </div>
+
+  <!-- ANGEBOTE -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      Angebote
+    </button>
+    <div class="accordion-content">
+      <a href="./mittagsmenu.html" onclick="toggleMenu()">Mittagsmenü</a>
+      <a href="./weinauswahl.html" onclick="toggleMenu()">Weinauswahl</a>
+      <a href="./catering.html" onclick="toggleMenu()">Catering</a>
+      <a href="./separee.html" onclick="toggleMenu()">Séparée</a>
+    </div>
+  </div>
+
+  <!-- KONTAKT -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      Kontakt
+    </button>
+    <div class="accordion-content">
+      <a href="#contact" onclick="toggleMenu()">Adresse</a>
+      <a href="tel:+49123456789">Telefon</a>
+      <a href="mailto:info@trattoria.de">E-Mail</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+  </div>
+
+</div>
 </div>
 
 <!-- HERO -->
@@ -733,6 +830,24 @@ function openMenu() {
 
 function toggleMenu() {
 document.getElementById("mobileMenu").classList.toggle("open");
+}
+
+function toggleAccordion(btn) {
+  const item = btn.parentElement;
+  const content = item.querySelector(".accordion-content");
+
+  const isOpen = item.classList.contains("open");
+
+  // alle anderen schließen (optional für sauberes UX-Verhalten)
+  document.querySelectorAll(".accordion-item").forEach(i => {
+    i.classList.remove("open");
+    i.querySelector(".accordion-content").style.maxHeight ="0px";
+  });
+
+  if (!isOpen) {
+    item.classList.add("open");
+    content.style.maxHeight = content.scrollHeight + "px";
+  }
 }
 
 </script>
