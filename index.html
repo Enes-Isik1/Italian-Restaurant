@@ -50,15 +50,12 @@ body { -webkit-text-size-adjust: 100%; }
   .reveal-right.visible { opacity:1; transform:none; }
 
   /* ── NAV ── */
-  nav {
-    position: fixed; top:0; width:100%; z-index:200;
-    display:flex; justify-content:space-between; align-items:center;
-    padding: 1.2rem 4rem;
-    background: rgba(245,239,224,0);
-    backdrop-filter: blur(0px);
-    border-bottom: 1px solid transparent;
-    transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
-  }
+  nav { position: fixed; top:0; width:100%; z-index:200;
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 1.2rem 4rem; background: rgba(245,239,224,0); backdrop-filter: blur(0px);
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+}
   nav.scrolled {
     background: rgba(245,239,224,0.95);
     backdrop-filter: blur(12px);
@@ -237,9 +234,15 @@ body { -webkit-text-size-adjust: 100%; }
 .menu-list-item{
   display:flex;
   justify-content:space-between;
+  align-items:flex-start;
   gap:2rem;
   padding:1.3rem 0;
-  border-bottom:1px solid rgba(0,0,0,0.08);}
+  border-bottom:1px solid rgba(0,0,0,0.08);
+}
+
+.menu-info{
+  flex:1;
+}
 .menu-list-item:last-child{
   border-bottom:none;}
 .menu-list-item h4{
@@ -428,18 +431,26 @@ nav { padding: 1rem 1rem; }
 }
 
 /* nur mobil sichtbar */
-@media (max-width: 768px)
 
-{
+@media (max-width: 768px) {
+
   .nav-links,
-  .nav-cta {
+  .nav-cta,
+  .desktop-dropdown {
     display: none;
   }
 
-  .menu-toggle { display: none; 
+  .menu-toggle {
+    display: block;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
   }
 
-  nav.scrolled .menu-toggle { color: var(--terracotta);
+  nav.scrolled .menu-toggle {
+    color: var(--terracotta);
   }
 }
 /* ===== MOBILE FOOTER ACCORDION ===== */
@@ -502,12 +513,115 @@ nav { padding: 1rem 1rem; }
 .accordion-content a:hover {
   color: var(--gold);
 }
+
+/* ===== DESKTOP DROPDOWN MENU ===== */
+.desktop-dropdown {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: auto;
+  align-items: center;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  transition: color 0.2s;
+}
+
+nav.scrolled .dropbtn {
+  color: var(--warm-dark);
+}
+
+.dropbtn:hover {
+  color: var(--terracotta);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(28,18,8,0.95);
+  min-width: 200px;
+  padding: 0.8rem;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  z-index: 999;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  color: var(--gold);
+}
+
+/* HOVER LOGIK */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Desktop bleibt unverändert – Mobile bleibt komplett gleich */
+@media (max-width: 768px) {
+  .desktop-dropdown {
+    display: none;
+  }
+}
 </style>
 </head>
 <body>
 
 <nav id="mainNav">
   <div class="nav-logo">Trattoria <span>della Nonna</span></div>
+<!-- DESKTOP DROPDOWN MENU (oben rechts) -->
+<div class="desktop-dropdown">
+  <div class="dropdown">
+    <button class="dropbtn">Navigation</button>
+    <div class="dropdown-content">
+      <a href="#about">Über uns</a>
+      <a href="./menu.html">Speisekarte</a>
+      <a href="./gallery.html">Galerie</a>
+      <a href="#reservation">Reservierung</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropbtn">Angebote</button>
+    <div class="dropdown-content">
+      <a href="./mittagsmenu.html">Mittagsmenü</a>
+      <a href="./weinauswahl.html">Weinauswahl</a>
+      <a href="./catering.html">Catering</a>
+      <a href="./separee.html">Séparée</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropbtn">Kontakt</button>
+    <div class="dropdown-content">
+      <a href="#contact">Adresse</a>
+      <a href="tel:+49123456789">Telefon</a>
+      <a href="mailto:info@trattoria.de">E-Mail</a>
+      <a href="https://instagram.com">Instagram</a>
+    </div>
+  </div>
+</div>
   <ul class="nav-links">
     <li><a href="#about">Über uns</a></li>
     <li><a href="#menu">Speisekarte</a></li>
@@ -877,6 +991,7 @@ function toggleAccordion(btn) {
 </script>
 </body>
 </html>
+
 
 
 
